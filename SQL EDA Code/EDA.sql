@@ -5,18 +5,18 @@ What we did:
 We performed a RIGHT JOIN between "fact_orders" and "fact_order_items" on order_id to check if any order_id exists in "fact_order_items" but not in "fact_orders".
 
 What we found:
-There are 36,348 orders in "fact_order_items" that do not have a matching record in "fact_orders", meaning these orders were not captured in the main order table even though order items exist.
+There are 16425 orders in "fact_order_items" that do not have a matching record in "fact_orders", meaning these orders were not captured in the main order table even though order items exist.
 */
-select 
-	count(*) as missing_data_in_fact_orders
-from
-	quick_bite_schema.fact_orders as t1
-right join 
-	quick_bite_schema.fact_order_items as t2
-on 
+SELECT 
+	count(distinct t2.order_id)
+FROM 
+	quick_bite_schema.fact_order_items AS t2
+LEFT JOIN 
+	quick_bite_schema.fact_orders AS t1
+ON 
 	t1.order_id = t2.order_id
-where
-	t1.order_id is null;
+WHERE 
+	t1.order_id IS NULL
 
 
 
@@ -164,3 +164,21 @@ where
 	restaurant_id in ('REST19114', 'REST18903', 'REST04209', 'REST07109', 'REST19114');
 
 
+
+
+
+
+
+
+-- this is how we will form the rows for missing order id in the fact_orders
+-- order_id: can get directly
+-- customer_id: unknown
+-- resturant_id: can get directly 
+-- delivery partner unknonw
+-- order_timestamp unknown
+-- subtotal_amount : sum(unit_price) 
+-- discount_amount:sum(item_discount)
+-- delievry_fee: unknown
+-- total_amount: subtotal_amount - discount_delivery_fee(unknown)
+-- is_cod: unknown
+-- is_cancelld: N
