@@ -5,7 +5,7 @@ What we did:
 We performed a RIGHT JOIN between "fact_orders" and "fact_order_items" on order_id to check if any order_id exists in "fact_order_items" but not in "fact_orders".
 
 What we found:
-There are 16425 orders in "fact_order_items" that do not have a matching record in "fact_orders", meaning these orders were not captured in the main order table even though order items exist.
+There are 16,425 orders in "fact_order_items" that do not have a matching record in "fact_orders", meaning these orders were not captured in the main order table even though order items exist.
 */
 SELECT 
 	count(distinct t2.order_id)
@@ -182,3 +182,4 @@ where
 -- total_amount: subtotal_amount - discount_delivery_fee(unknown)
 -- is_cod: unknown
 -- is_cancelld: N
+
