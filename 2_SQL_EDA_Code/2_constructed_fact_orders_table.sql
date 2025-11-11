@@ -3,6 +3,19 @@
 -- The following steps create a new table, constructed_orders, in SQL Server with all corrected and imputed data.
 -- The only unfilled data we have is for customer_id and delivery_partner_id.
 
+-- this is how we will form the rows for missing order id in the fact_orders
+-- order_id: can get directly
+-- customer_id: unknown
+-- resturant_id: can get directly 
+-- delivery partner unknown
+-- order_timestamp unknown
+-- subtotal_amount : sum(unit_price) 
+-- discount_amount:sum(item_discount)
+-- delievry_fee: unknown
+-- total_amount: subtotal_amount - discount_delivery_fee(unknown)
+-- is_cod: unknown
+-- is_cancelld: N
+-- month: from order_id
 
 with missing_order_id_in_fact_orders as(
     SELECT 

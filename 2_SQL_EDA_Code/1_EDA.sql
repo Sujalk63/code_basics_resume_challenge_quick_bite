@@ -164,22 +164,3 @@ where
 	restaurant_id in ('REST19114', 'REST18903', 'REST04209', 'REST07109', 'REST19114');
 
 
-
-
-
-
-
-
--- this is how we will form the rows for missing order id in the fact_orders
--- order_id: can get directly
--- customer_id: unknown
--- resturant_id: can get directly 
--- delivery partner unknonw
--- order_timestamp unknown
--- subtotal_amount : sum(unit_price) 
--- discount_amount:sum(item_discount)
--- delievry_fee: unknown
--- total_amount: subtotal_amount - discount_delivery_fee(unknown)
--- is_cod: unknown
--- is_cancelld: N
-
